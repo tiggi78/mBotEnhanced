@@ -1,0 +1,1012 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino"
+        name="0">
+      <in>Arduino.h</in>
+      <in>CDC.cpp</in>
+      <in>Client.h</in>
+      <in>HardwareSerial.cpp</in>
+      <in>HardwareSerial.h</in>
+      <in>HardwareSerial0.cpp</in>
+      <in>HardwareSerial1.cpp</in>
+      <in>HardwareSerial2.cpp</in>
+      <in>HardwareSerial3.cpp</in>
+      <in>HardwareSerial_private.h</in>
+      <in>IPAddress.cpp</in>
+      <in>IPAddress.h</in>
+      <in>PluggableUSB.cpp</in>
+      <in>PluggableUSB.h</in>
+      <in>Print.cpp</in>
+      <in>Print.h</in>
+      <in>Printable.h</in>
+      <in>Server.h</in>
+      <in>Stream.cpp</in>
+      <in>Stream.h</in>
+      <in>Tone.cpp</in>
+      <in>USBAPI.h</in>
+      <in>USBCore.cpp</in>
+      <in>USBCore.h</in>
+      <in>USBDesc.h</in>
+      <in>Udp.h</in>
+      <in>WCharacter.h</in>
+      <in>WInterrupts.c</in>
+      <in>WMath.cpp</in>
+      <in>WString.cpp</in>
+      <in>WString.h</in>
+      <in>abi.cpp</in>
+      <in>binary.h</in>
+      <in>hooks.c</in>
+      <in>main.cpp</in>
+      <in>new.cpp</in>
+      <in>new.h</in>
+      <in>wiring.c</in>
+      <in>wiring_analog.c</in>
+      <in>wiring_digital.c</in>
+      <in>wiring_private.h</in>
+      <in>wiring_pulse.S</in>
+      <in>wiring_pulse.c</in>
+      <in>wiring_shift.c</in>
+    </df>
+    <df root="." name="1">
+      <in>mbot_factory_firmware.ino.cpp</in>
+    </df>
+    <df root="../Makeblock-Libraries/src" name="2">
+      <df name="utility">
+        <df name="avr">
+          <in>Servo.cpp</in>
+          <in>ServoTimers.h</in>
+        </df>
+        <in>EEPROM.h</in>
+        <in>SPI.h</in>
+        <in>Servo.h</in>
+        <in>SoftwareSerial.h</in>
+        <in>Wire.h</in>
+        <in>twi.h</in>
+      </df>
+      <in>Me4Button.cpp</in>
+      <in>Me4Button.h</in>
+      <in>Me7SegmentDisplay.cpp</in>
+      <in>Me7SegmentDisplay.h</in>
+      <in>MeAuriga.h</in>
+      <in>MeBaseBoard.h</in>
+      <in>MeBluetooth.cpp</in>
+      <in>MeBluetooth.h</in>
+      <in>MeBuzzer.cpp</in>
+      <in>MeBuzzer.h</in>
+      <in>MeColorSensor.cpp</in>
+      <in>MeColorSensor.h</in>
+      <in>MeCompass.cpp</in>
+      <in>MeCompass.h</in>
+      <in>MeConfig.h</in>
+      <in>MeDCMotor.cpp</in>
+      <in>MeDCMotor.h</in>
+      <in>MeEEPROM.h</in>
+      <in>MeEncoderMotor.cpp</in>
+      <in>MeEncoderMotor.h</in>
+      <in>MeEncoderNew.cpp</in>
+      <in>MeEncoderNew.h</in>
+      <in>MeEncoderOnBoard.cpp</in>
+      <in>MeEncoderOnBoard.h</in>
+      <in>MeFlameSensor.cpp</in>
+      <in>MeFlameSensor.h</in>
+      <in>MeGasSensor.cpp</in>
+      <in>MeGasSensor.h</in>
+      <in>MeGyro.cpp</in>
+      <in>MeGyro.h</in>
+      <in>MeHostParser.cpp</in>
+      <in>MeHostParser.h</in>
+      <in>MeHumitureSensor.cpp</in>
+      <in>MeHumitureSensor.h</in>
+      <in>MeIR.cpp</in>
+      <in>MeIR.h</in>
+      <in>MeInfraredReceiver.cpp</in>
+      <in>MeInfraredReceiver.h</in>
+      <in>MeJoystick.cpp</in>
+      <in>MeJoystick.h</in>
+      <in>MeLEDMatrix.cpp</in>
+      <in>MeLEDMatrix.h</in>
+      <in>MeLEDMatrixData.h</in>
+      <in>MeLightSensor.cpp</in>
+      <in>MeLightSensor.h</in>
+      <in>MeLimitSwitch.cpp</in>
+      <in>MeLimitSwitch.h</in>
+      <in>MeLineFollower.cpp</in>
+      <in>MeLineFollower.h</in>
+      <in>MeMCore.h</in>
+      <in>MeMbotDCMotor.cpp</in>
+      <in>MeMbotDCMotor.h</in>
+      <in>MeMegaPi.h</in>
+      <in>MeMegaPiDCMotor.cpp</in>
+      <in>MeMegaPiDCMotor.h</in>
+      <in>MeMegaPiPro.h</in>
+      <in>MeMegaPiPro4DcMotor.cpp</in>
+      <in>MeMegaPiPro4DcMotor.h</in>
+      <in>MeMegaPiProESCMotor.cpp</in>
+      <in>MeMegaPiProESCMotor.h</in>
+      <in>MeOnBoardTemp.cpp</in>
+      <in>MeOnBoardTemp.h</in>
+      <in>MeOneWire.cpp</in>
+      <in>MeOneWire.h</in>
+      <in>MeOrion.h</in>
+      <in>MePIRMotionSensor.cpp</in>
+      <in>MePIRMotionSensor.h</in>
+      <in>MePS2.cpp</in>
+      <in>MePS2.h</in>
+      <in>MePm25Sensor.cpp</in>
+      <in>MePm25Sensor.h</in>
+      <in>MePort.cpp</in>
+      <in>MePort.h</in>
+      <in>MePotentiometer.cpp</in>
+      <in>MePotentiometer.h</in>
+      <in>MePressureSensor.cpp</in>
+      <in>MePressureSensor.h</in>
+      <in>MeRGBLed.cpp</in>
+      <in>MeRGBLed.h</in>
+      <in>MeSerial.cpp</in>
+      <in>MeSerial.h</in>
+      <in>MeShield.h</in>
+      <in>MeShutter.cpp</in>
+      <in>MeShutter.h</in>
+      <in>MeSmartServo.cpp</in>
+      <in>MeSmartServo.h</in>
+      <in>MeSoundSensor.cpp</in>
+      <in>MeSoundSensor.h</in>
+      <in>MeStepper.cpp</in>
+      <in>MeStepper.h</in>
+      <in>MeStepperOnBoard.cpp</in>
+      <in>MeStepperOnBoard.h</in>
+      <in>MeTemperature.cpp</in>
+      <in>MeTemperature.h</in>
+      <in>MeTouchSensor.cpp</in>
+      <in>MeTouchSensor.h</in>
+      <in>MeUSBHost.cpp</in>
+      <in>MeUSBHost.h</in>
+      <in>MeUltrasonicSensor.cpp</in>
+      <in>MeUltrasonicSensor.h</in>
+      <in>MeVoice.cpp</in>
+      <in>MeVoice.h</in>
+      <in>MeWifi.cpp</in>
+      <in>MeWifi.h</in>
+    </df>
+    <df root="/usr/local/arduino-1.8.12/hardware/arduino/avr/variants/standard"
+        name="3">
+      <in>pins_arduino.h</in>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+      <itemPath>nbproject/private/launcher.properties</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>.</Elem>
+    <Elem>../Makeblock-Libraries/src</Elem>
+    <Elem>/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino</Elem>
+    <Elem>/usr/local/arduino-1.8.12/hardware/arduino/avr/variants/standard</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
+          <executablePath></executablePath>
+          <ccTool>
+            <incDir>
+              <pElem>/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino</pElem>
+              <pElem>/usr/local/arduino-1.8.12/hardware/arduino/avr/libraries/Wire/src</pElem>
+              <pElem>/usr/local/arduino-1.8.12/hardware/arduino/avr/libraries/SoftwareSerial/src</pElem>
+              <pElem>/usr/local/arduino-1.8.12/hardware/arduino/avr/variants/standard</pElem>
+              <pElem>/usr/local/arduino-1.8.12/hardware/tools/avr/avr/include</pElem>
+              <pElem>../Makeblock-Libraries/src</pElem>
+            </incDir>
+            <preprocessorList>
+              <Elem>ARDUINO_ARCH_AVR</Elem>
+              <Elem>F_CPU=16000000L</Elem>
+              <Elem>RDUINO=1812</Elem>
+              <Elem>__PROG_TYPES_COMPAT__</Elem>
+            </preprocessorList>
+          </ccTool>
+        </makeTool>
+        <preBuild>
+          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
+          <preBuildCommand></preBuildCommand>
+        </preBuild>
+      </makefileType>
+      <item path="../Makeblock-Libraries/src/Me4Button.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/Me4Button.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/Me7SegmentDisplay.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/Me7SegmentDisplay.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeAuriga.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeBaseBoard.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeBluetooth.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeBluetooth.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeBuzzer.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeBuzzer.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeColorSensor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeColorSensor.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeCompass.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeCompass.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeConfig.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeDCMotor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeDCMotor.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeEEPROM.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeEncoderMotor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeEncoderMotor.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeEncoderNew.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeEncoderNew.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeEncoderOnBoard.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeEncoderOnBoard.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeFlameSensor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeFlameSensor.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeGasSensor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeGasSensor.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeGyro.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeGyro.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeHostParser.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeHostParser.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeHumitureSensor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeHumitureSensor.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeIR.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeIR.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeInfraredReceiver.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeInfraredReceiver.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeJoystick.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeJoystick.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeLEDMatrix.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeLEDMatrix.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeLEDMatrixData.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeLightSensor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeLightSensor.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeLimitSwitch.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeLimitSwitch.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeLineFollower.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeLineFollower.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeMCore.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeMbotDCMotor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeMbotDCMotor.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeMegaPi.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeMegaPiDCMotor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeMegaPiDCMotor.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeMegaPiPro.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeMegaPiPro4DcMotor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeMegaPiPro4DcMotor.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeMegaPiProESCMotor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeMegaPiProESCMotor.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeOnBoardTemp.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeOnBoardTemp.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeOneWire.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeOneWire.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeOrion.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MePIRMotionSensor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MePIRMotionSensor.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MePS2.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MePS2.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MePm25Sensor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MePm25Sensor.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MePort.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MePort.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MePotentiometer.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MePotentiometer.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MePressureSensor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MePressureSensor.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeRGBLed.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeRGBLed.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeSerial.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeSerial.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeShield.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeShutter.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeShutter.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeSmartServo.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeSmartServo.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeSoundSensor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeSoundSensor.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeStepper.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeStepper.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeStepperOnBoard.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeStepperOnBoard.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeTemperature.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeTemperature.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeTouchSensor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeTouchSensor.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeUSBHost.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeUSBHost.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeUltrasonicSensor.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeUltrasonicSensor.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeVoice.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeVoice.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeWifi.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/MeWifi.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/utility/EEPROM.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/utility/SPI.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/utility/Servo.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/utility/SoftwareSerial.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/utility/Wire.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/utility/avr/Servo.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/utility/avr/ServoTimers.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../Makeblock-Libraries/src/utility/twi.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/Arduino.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/CDC.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/Client.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/HardwareSerial.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/HardwareSerial.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/HardwareSerial0.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/HardwareSerial1.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/HardwareSerial2.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/HardwareSerial3.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/HardwareSerial_private.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/IPAddress.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/IPAddress.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/PluggableUSB.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/PluggableUSB.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/Print.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/Print.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/Printable.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/Server.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/Stream.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/Stream.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/Tone.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/USBAPI.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/USBCore.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/USBCore.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/USBDesc.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/Udp.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/WCharacter.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/WInterrupts.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/WMath.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/WString.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/WString.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/abi.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/binary.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/hooks.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/main.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/new.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/new.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/wiring.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/wiring_analog.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/wiring_digital.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/wiring_private.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/wiring_pulse.S"
+            ex="false"
+            tool="4"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/wiring_pulse.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino/wiring_shift.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+      </item>
+      <item path="/usr/local/arduino-1.8.12/hardware/arduino/avr/variants/standard/pins_arduino.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="mbot_factory_firmware.ino.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+    </conf>
+  </confs>
+</configurationDescriptor>
