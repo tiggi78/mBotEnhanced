@@ -6,7 +6,7 @@
 
 ### PROJECT_DIR
 ### This is the path to where you have created/cloned your project
-PROJECT_DIR       = /home/giovanni/projects/mBotEnhanced
+PROJECT_DIR       = .
 
 ### ARDMK_DIR
 ### Path to the Arduino-Makefile directory.
@@ -22,9 +22,8 @@ ARDUINO_DIR       = /usr/local/arduino-1.8.12
 ### USER_LIB_PATH
 ### Path to where the your project's libraries are stored.
 #USER_LIB_PATH    :=  $(PROJECT_DIR)/lib
-USER_LIB_PATH    :=  /home/giovanni/projects
-#ARDUINO_LIBS     += Makeblock-Libraries
-#Wire SoftwareSerial
+USER_LIB_PATH    :=  ../
+ARDUINO_LIBS     += Makeblock-Libraries Wire SoftwareSerial
 
 
 ### BOARD_TAG
@@ -81,5 +80,7 @@ OBJDIR            = $(PROJECT_DIR)/bin/$(BOARD_TAG)/$(CURRENT_DIR)
 #ARDUINO_QUIET := 1
 
 ### Do not touch - the path to Arduino.mk, inside the ARDMK_DIR
+TEST = $(shell ln -s Makeblock-Libraries ../MeMCore)
+
 include $(ARDMK_DIR)/Arduino.mk
 
