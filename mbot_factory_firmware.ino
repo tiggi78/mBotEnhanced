@@ -10,14 +10,15 @@
 * http://www.makeblock.cc/
 **************************************************************************/
 #include <Wire.h>
-#include <SoftwareSerial.h>
+//#include <SoftwareSerial.h>
 #include <MeMCore.h>
+#include <Arduino.h>
 
 /* Local functions */
 extern HardwareSerial Serial;
 
 void writeSerial( unsigned char c );
-void readSerial();
+char readSerial( boolean& isAvailable );
 
 void parseData();
 void Stop();
@@ -36,12 +37,12 @@ MeJoystick joystick;
 MeBuzzer buzzer;
 MeTemperature ts;
 Me7SegmentDisplay seg;
-
 MeDCMotor MotorL( M1 );
 MeDCMotor MotorR( M2 );
 MePort generalDevice;
 Servo servo;
 
+/* TONE NOTES */
 #define NTD1     294
 #define NTD2     330
 #define NTD3     350
@@ -64,26 +65,25 @@ Servo servo;
 #define NTDH6    990
 #define NTDH7    112
 
-
+/* motor_sta values */
 #define RUN_F    0x01
 #define RUN_B    0x01<<1
 #define RUN_L    0x01<<2
 #define RUN_R    0x01<<3
 #define STOP     0
 
+/* controlFlag vales */
 #define BLUE_TOOTH      0
 #define IR_CONTROLER    1
 
-uint8_t high = 15;
-uint8_t low  = 15;
-
+/* mode values */
 enum
 {
     MODE_A,
     MODE_B,
     MODE_C
 };
-
+/*
 typedef struct MeModule
 {
     int16_t device;
@@ -93,7 +93,7 @@ typedef struct MeModule
     int16_t index;
     float values[3];
 } MeModule;
-
+*/
 union
 {
     byte byteVal[4];
@@ -113,40 +113,49 @@ union
     short shortVal;
 } valShort;
 
-MeModule modules[12];
+//MeModule modules[12];
+#define BUFFER_LEN 52
 
-char buffer[52];
-char bufferBt[52];
-char serialRead;
-byte index = 0;
-byte dataLen;
-byte modulesLen = 0;
-unsigned char prevc = 0;
+char buffer[BUFFER_LEN];
+//char bufferBt[52];
+//char serialRead;
+//byte index = 0;
+//byte dataLen;
+//byte modulesLen = 0;
+//unsigned char prevc = 0;
+
 String mVersion = "06.01.009";
 
-boolean isAvailable = false;
-boolean isStart = false;
-boolean buttonPressed = false;
-boolean currentPressed = false;
-boolean pre_buttonPressed = false;
+//boolean isAvailable = false;
+//boolean isStart = false;
+//boolean buttonPressed = false;
+//boolean currentPressed = false;
+//boolean pre_buttonPressed = false;
 
-float angleServo = 90.0;
+//float angleServo = 90.0;
 double lastTime = 0.0;
 double currentTime = 0.0;
 
-int len = 52;
-int LineFollowFlag = 0;
+//int len = 52;
+//int LineFollowFlag = 0;
+// Motor constants
+
+/* Global speed */
 int moveSpeed = 200;
+/* Offset for motor speeed (when pushing on remote control) */
 int minSpeed = 48;
+/* Multiplaction factor for motor speed (when pushing on remote control) */
 int factor = 23;
+
 int analogs[8] = {A0, A1, A2, A3, A4, A5, A6, A7};
-int px = 0;
+//int px = 0;
 
 uint8_t command_index = 0;
 uint8_t motor_sta = STOP;
 uint8_t mode = MODE_A;
 uint8_t controlflag = IR_CONTROLER;
 
+/* device of readSensor() function */
 #define VERSION                0
 #define ULTRASONIC_SENSOR      1
 #define TEMPERATURE_SENSOR     2
@@ -214,6 +223,7 @@ uint8_t controlflag = IR_CONTROLER;
 #define GET_PM2_5                        0x02
 #define GET_PM10                         0x03
 
+/* action values of parseData()*/
 #define GET 1
 #define RUN 2
 #define RESET 4
@@ -245,19 +255,32 @@ void writeSerial( unsigned char c )
     Serial.write( c );
 }
 
-void readSerial()
+char readSerial( boolean& isAvailable )
 {
+    char serialRead = 0;
     isAvailable = false;
     if( Serial.available() > 0 )
     {
         isAvailable = true;
         serialRead = Serial.read();
     }
+    return serialRead;
 }
-
+/*
+ * Protocol: 0xFF 0x55 <DATALEN> <data1> <data2> ... <dataN>
+ *
+ */
 void serialHandle()
 {
-    readSerial();
+    static byte index = 0;
+    static byte dataLen = 0;
+    static boolean isStart = false;
+    static unsigned char prevc = 0;
+
+    boolean isAvailable = false;
+
+    char serialRead = readSerial( isAvailable );
+
     if( isAvailable )
     {
         unsigned char c = serialRead & 0xff;
@@ -286,7 +309,7 @@ void serialHandle()
             }
         }
         index++;
-        if( index > 51 )
+        if( index >= BUFFER_LEN )
         {
             index = 0;
             isStart = false;
@@ -316,6 +339,10 @@ void get_ir_command()
     if( ir.decode() )
     {
         uint32_t value = ir.value;
+        Serial.print( "IRVALUE: " );
+        String hex( value, 16 );
+        Serial.print( hex );
+
         time = millis();
         switch( ( value >> 16 ) & 0xff )
         {
@@ -616,8 +643,12 @@ void modeA()
 
 void modeB()
 {
+
+    uint8_t high = 15;
+    uint8_t low  = 15;
+
     uint8_t d = ultr.distanceCm( 70 );
-    static long time = millis();
+    //static long time = millis();
     randomSeed( analogRead( 6 ) );
     uint8_t randNumber = random( 2 );
     if( ( d > high ) || ( d == 0 ) )
@@ -657,6 +688,8 @@ void modeB()
 
 void modeC()
 {
+    static int LineFollowFlag = 0;
+
     uint8_t val;
     val = line.readSensors();
     if( moveSpeed > 230 )
@@ -705,9 +738,9 @@ void modeC()
 
 void parseData()
 {
-    isStart = false;
+    //isStart = false;
     int idx = readBuffer( 3 );
-    command_index = ( uint8_t )idx;
+    command_index = ( uint8_t ) idx;
     int action = readBuffer( 4 );
     int device = readBuffer( 5 );
     switch( action )
@@ -968,7 +1001,7 @@ void runModule( int device )
         int16_t len = readBuffer( 2 ) - 3;
         for( int16_t i = 0; i < len; i++ )
         {
-            Str_data += ( char )readBuffer( 6 + i );
+            Str_data += ( char ) readBuffer( 6 + i );
         }
         ir.sendString( Str_data );
         Str_data = "";
@@ -1055,7 +1088,7 @@ void readSensor( int device )
         {
             ultr.reset( port );
         }
-        value = ( float )ultr.distanceCm();
+        value = ( float ) ultr.distanceCm();
         writeHead();
         writeSerial( command_index );
         sendFloat( value );
@@ -1182,7 +1215,7 @@ void readSensor( int device )
         pinMode( pin, INPUT );
         boolean currentPressed = !( analogRead( pin ) > 10 );
         sendByte( s ^ ( currentPressed ? 1 : 0 ) );
-        buttonPressed = currentPressed;
+        //buttonPressed = currentPressed;
     }
     break;
     case  GYRO:
@@ -1231,50 +1264,67 @@ void readSensor( int device )
     break;
     }
 }
-
+#define INT_LED 13
+#define INT_BUTTON   7
 void setup()
 {
     delay( 5 );
     Stop();
-    pinMode( 13, OUTPUT );
-    pinMode( 7, INPUT );
-    digitalWrite( 13, HIGH );
+    pinMode( INT_LED, OUTPUT );
+    pinMode( INT_BUTTON, INPUT );
+    digitalWrite( INT_LED, HIGH );
+
     delay( 300 );
-    digitalWrite( 13, LOW );
+
+    digitalWrite( INT_LED, LOW );
     rgb.reset( PORT_7, SLOT2 );
+
     rgb.setColor( 0, 0, 0 );
     rgb.show();
     delay( 1 );
     rgb.setColor( 10, 0, 0 );
     rgb.show();
-    buzzer.tone( NTD1, 300 );
+    //buzzer.tone( NTD1, 300 );
+
     delay( 300 );
+
     rgb.setColor( 0, 10, 0 );
     rgb.show();
-    buzzer.tone( NTD2, 300 );
+
+    //buzzer.tone( NTD2, 300 );
     delay( 300 );
+
     rgb.setColor( 0, 0, 10 );
     rgb.show();
-    buzzer.tone( NTD3, 300 );
+
+    //buzzer.tone( NTD3, 300 );
     delay( 300 );
+
     rgb.setColor( 10, 10, 10 );
     rgb.show();
+
     Serial.begin( 115200 );
+
     buzzer.noTone();
     ir.begin();
+
+    Serial.println( "[mBotEnhanced]" );
     Serial.print( "Version: " );
     Serial.println( mVersion );
+
     ledMx.setBrightness( 6 );
     ledMx.setColorIndex( 1 );
 }
 
 void loop()
 {
+    static boolean pre_buttonPressed = false;
+
     while( 1 )
     {
         get_ir_command();
         serialHandle();
-        currentPressed = !( analogRead( 7 ) > 100 );
+        bool currentPressed = !( analogRead( 7 ) > 100 );
         if( currentPressed != pre_buttonPressed )
         {
             if( ( rgb.getPort() != PORT_7 ) || rgb.getSlot() != SLOT2 )
