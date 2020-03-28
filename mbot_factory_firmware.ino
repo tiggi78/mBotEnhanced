@@ -14,14 +14,13 @@
 #include <MeMCore.h>
 #include <Arduino.h>
 
-/* Local functions */
-extern HardwareSerial Serial;
+#include "SerialHandler.h"
 
-void writeSerial( unsigned char c );
-char readSerial( boolean& isAvailable );
+/* Local functions */
 
 void parseData();
 void Stop();
+
 void ChangeSpeed( int spd );
 void readSensor( int device );
 void runModule( int device );
@@ -114,9 +113,6 @@ union
 } valShort;
 
 //MeModule modules[12];
-#define BUFFER_LEN 52
-
-char buffer[BUFFER_LEN];
 //char bufferBt[52];
 //char serialRead;
 //byte index = 0;
@@ -229,43 +225,6 @@ uint8_t controlflag = IR_CONTROLER;
 #define RESET 4
 #define START 5
 
-unsigned char readBuffer( int16_t index )
-{
-    return buffer[index];
-}
-
-void writeBuffer( int16_t index, unsigned char c )
-{
-    buffer[index] = c;
-}
-
-void writeHead()
-{
-    writeSerial( 0xff );
-    writeSerial( 0x55 );
-}
-
-void writeEnd()
-{
-    Serial.println();
-}
-
-void writeSerial( unsigned char c )
-{
-    Serial.write( c );
-}
-
-char readSerial( boolean& isAvailable )
-{
-    char serialRead = 0;
-    isAvailable = false;
-    if( Serial.available() > 0 )
-    {
-        isAvailable = true;
-        serialRead = Serial.read();
-    }
-    return serialRead;
-}
 /*
  * Protocol: 0xFF 0x55 <DATALEN> <data1> <data2> ... <dataN>
  *

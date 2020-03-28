@@ -1,0 +1,7 @@
+<#if licenseFirst??>
+${licenseFirst}
+</#if>
+${licensePrefix}License            : CC-BY-SA 3.0
+<#if licenseLast??>
+${licenseLast}
+</#if>
