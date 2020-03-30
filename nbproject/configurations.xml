@@ -49,6 +49,8 @@
       <in>wiring_shift.c</in>
     </df>
     <df root="." name="1">
+      <in>MotorHandler.cpp</in>
+      <in>MotorHandler.h</in>
       <in>SerialHandler.cpp</in>
       <in>SerialHandler.h</in>
       <in>mbot_factory_firmware.ino</in>
@@ -1006,6 +1008,10 @@
             ex="false"
             tool="3"
             flavor2="0">
+      </item>
+      <item path="MotorHandler.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="MotorHandler.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="SerialHandler.cpp" ex="false" tool="1" flavor2="0">
       </item>
