@@ -15,9 +15,13 @@
 
 #include "SerialHandler.h"
 #include "MotorHandler.h"
-/* Local functions */
+/*
+ * Timer0 (16 bit)
+ *
+ */
 
-/* device of readSensor() function */
+
+/* Device of readSensor() function */
 enum device_e
 {
     VERSION               = 0,
@@ -87,7 +91,7 @@ enum device_e
 #define GET_PM2_5                        0x02
 #define GET_PM10                         0x03
 
-
+/* Local functions */
 void parseData();
 void LedsOff();
 
@@ -96,6 +100,9 @@ void runModule( enum device_e device );
 
 /* GLOBALS (peripehrals) */
 MeRGBLed rgb( 0, 16 );
+
+MeRGBLed internalRGB( PORT_7, 2 );
+
 MeUltrasonicSensor ultr( PORT_3 );
 MeLineFollower line( PORT_2 );
 MeLEDMatrix ledMx;
@@ -176,33 +183,12 @@ typedef struct MeModule
 } MeModule;
 */
 
-//MeModule modules[12];
-//char bufferBt[52];
-//char serialRead;
-//byte index = 0;
-//byte dataLen;
-//byte modulesLen = 0;
-//unsigned char prevc = 0;
-
 String mVersion = "06.01.009";
 
-//boolean isAvailable = false;
-//boolean isStart = false;
-//boolean buttonPressed = false;
-//boolean currentPressed = false;
-//boolean pre_buttonPressed = false;
-
-//float angleServo = 90.0;
 double lastTime = 0.0;
 double currentTime = 0.0;
 
-//int len = 52;
-//int LineFollowFlag = 0;
-// Motor constants
-
-
 int analogs[8] = {A0, A1, A2, A3, A4, A5, A6, A7};
-//int px = 0;
 
 uint8_t command_index = 0;
 
@@ -295,13 +281,16 @@ void get_ir_command()
             cli();
             buzzer.tone( NTD1, 300 );
             sei();
-            if( ( rgb.getPort() != PORT_7 ) || rgb.getSlot() != SLOT2 )
-            {
-                rgb.reset( PORT_7, SLOT2 );;
-            }
-            rgb.setColor( 0, 0, 0 );
-            rgb.setColor( 10, 10, 10 );
-            rgb.show();
+            /*
+                        if( ( rgb.getPort() != PORT_7 ) || rgb.getSlot() != SLOT2 )
+                        {
+                            rgb.reset( PORT_7, SLOT2 );;
+                        }
+                        rgb.setColor( 0, 0, 0 );
+             */
+
+            internalRGB.setColor( 10, 10, 10 );
+            internalRGB.show();
             break;
         case IR_BUTTON_B:
             controlflag = IR_CONTROLER;
@@ -312,13 +301,15 @@ void get_ir_command()
             cli();
             buzzer.tone( NTD2, 300 );
             sei();
+            /*
             if( ( rgb.getPort() != PORT_7 ) || rgb.getSlot() != SLOT2 )
             {
                 rgb.reset( PORT_7, SLOT2 );;
             }
             rgb.setColor( 0, 0, 0 );
-            rgb.setColor( 0, 10, 0 );
-            rgb.show();
+            */
+            internalRGB.setColor( 0, 10, 0 );
+            internalRGB.show();
             break;
         case IR_BUTTON_C:
             controlflag = IR_CONTROLER;
@@ -329,26 +320,30 @@ void get_ir_command()
             cli();
             buzzer.tone( NTD3, 300 );
             sei();
+            /*
             if( ( rgb.getPort() != PORT_7 ) || rgb.getSlot() != SLOT2 )
             {
                 rgb.reset( PORT_7, SLOT2 );;
             }
             rgb.setColor( 0, 0, 0 );
-            rgb.setColor( 0, 0, 10 );
-            rgb.show();
+             */
+            internalRGB.setColor( 0, 0, 10 );
+            internalRGB.show();
             break;
         case IR_BUTTON_PLUS:
             controlflag = IR_CONTROLER;
             if( mode == MODE_A )
             {
                 motorStatus = RUN_F;
+                /*
                 if( ( rgb.getPort() != PORT_7 ) || rgb.getSlot() != SLOT2 )
                 {
                     rgb.reset( PORT_7, SLOT2 );;
                 }
                 rgb.setColor( 0, 0, 0 );
-                rgb.setColor( 10, 10, 0 );
-                rgb.show();
+                */
+                internalRGB.setColor( 10, 10, 0 );
+                internalRGB.show();
             }
             break;
         case IR_BUTTON_MINUS:
@@ -356,13 +351,15 @@ void get_ir_command()
             if( mode == MODE_A )
             {
                 motorStatus = RUN_B;
+                /*
                 if( ( rgb.getPort() != PORT_7 ) || rgb.getSlot() != SLOT2 )
                 {
                     rgb.reset( PORT_7, SLOT2 );;
                 }
                 rgb.setColor( 0, 0, 0 );
-                rgb.setColor( 10, 0, 0 );
-                rgb.show();
+                */
+                internalRGB.setColor( 10, 0, 0 );
+                internalRGB.show();
             }
             break;
         case IR_BUTTON_NEXT:
@@ -370,13 +367,15 @@ void get_ir_command()
             if( mode == MODE_A )
             {
                 motorStatus = RUN_R;
+                /*
                 if( ( rgb.getPort() != PORT_7 ) || rgb.getSlot() != SLOT2 )
                 {
                     rgb.reset( PORT_7, SLOT2 );;
                 }
                 rgb.setColor( 0, 0, 0 );
-                rgb.setColor( 1, 10, 10, 0 );
-                rgb.show();
+                */
+                internalRGB.setColor( 1, 10, 10, 0 );
+                internalRGB.show();
             }
             break;
         case IR_BUTTON_PREVIOUS:
@@ -384,13 +383,15 @@ void get_ir_command()
             if( mode == MODE_A )
             {
                 motorStatus = RUN_L;
+                /*
                 if( ( rgb.getPort() != PORT_7 ) || rgb.getSlot() != SLOT2 )
                 {
                     rgb.reset( PORT_7, SLOT2 );;
                 }
                 rgb.setColor( 0, 0, 0 );
-                rgb.setColor( 2, 10, 10, 0 );
-                rgb.show();
+                */
+                internalRGB.setColor( 2, 10, 10, 0 );
+                internalRGB.show();
             }
             break;
         case IR_BUTTON_9:
@@ -464,38 +465,44 @@ void get_ir_command()
         time = millis();
         if( mode == MODE_A )
         {
+            /*
             if( ( rgb.getPort() != PORT_7 ) || rgb.getSlot() != SLOT2 )
             {
                 rgb.reset( PORT_7, SLOT2 );;
             }
-            rgb.setColor( 10, 10, 10 );
-            rgb.show();
+             */
+            internalRGB.setColor( 10, 10, 10 );
+            internalRGB.show();
         }
         else if( mode == MODE_B )
         {
+            /*
             if( ( rgb.getPort() != PORT_7 ) || rgb.getSlot() != SLOT2 )
             {
                 rgb.reset( PORT_7, SLOT2 );;
             }
-            rgb.setColor( 0, 10, 0 );
-            rgb.show();
+            */
+            internalRGB.setColor( 0, 10, 0 );
+            internalRGB.show();
         }
         else if( mode == MODE_C )
         {
+            /*
             if( ( rgb.getPort() != PORT_7 ) || rgb.getSlot() != SLOT2 )
             {
                 rgb.reset( PORT_7, SLOT2 );;
             }
-            rgb.setColor( 0, 0, 10 );
-            rgb.show();
+             */
+            internalRGB.setColor( 0, 0, 10 );
+            internalRGB.show();
         }
     }
 }
 
 void LedsOff()
 {
-    rgb.setColor( 0, 0, 0 );
-    rgb.show();
+    internalRGB.setColor( 0, 0, 0 );
+    internalRGB.show();
 }
 
 void modeA()
@@ -535,11 +542,11 @@ void modeB()
     uint16_t low  = 10;
     double dist = ultr.distanceCm( 70 );
     uint16_t d = ( uint16_t ) dist;
-    //Serial.print( millis() );
-    //Serial.print( " MODE B dist, d: " );
-    //Serial.print( dist );
-    //Serial.print( ", " );
-    //Serial.println( d );
+    Serial.print( millis() );
+    Serial.print( "MODE B dist, d: " );
+    Serial.print( dist );
+    Serial.print( ", " );
+    Serial.println( d );
 
     //static long time = millis();
     uint8_t randNumber = random( 2 );
@@ -547,6 +554,7 @@ void modeB()
     if( ( d > high ) || ( d == 0 ) )
     {
         Forward();
+        Serial.println( "Forward" );
     }
     else if( ( d > low ) && ( d < high ) )
     {
@@ -555,10 +563,13 @@ void modeB()
         case 0:
             TurnLeft();
             delay( 300 );
+            Serial.println( "Left 300" );
+
             break;
         case 1:
             TurnRight();
             delay( 300 );
+            Serial.println( "Right 300" );
             break;
         }
     }
@@ -569,10 +580,12 @@ void modeB()
         case 0:
             TurnLeft();
             delay( 800 );
+            Serial.println( "Left 800" );
             break;
         case 1:
             TurnRight();
             delay( 800 );
+            Serial.println( "Right 800" );
             break;
         }
     }
@@ -886,14 +899,18 @@ void readSensor( enum device_e device )
     {
     case ULTRASONIC_SENSOR:
         {
+            /*
             if( ultr.getPort() != port )
             {
                 ultr.reset( port );
             }
+            */
             value = ( float ) ultr.distanceCm();
             writeHead();
             writeSerial( command_index );
             sendFloat( value );
+            //Serial.println( value );
+
         }
         break;
     case TEMPERATURE_SENSOR:
@@ -1082,31 +1099,31 @@ void setup()
     delay( 300 );
 
     digitalWrite( INT_LED, LOW );
-    rgb.reset( PORT_7, SLOT2 );
+    internalRGB.reset( PORT_7, SLOT2 );
 
-    rgb.setColor( 0, 0, 0 );
+    internalRGB.setColor( 0, 0, 0 );
     rgb.show();
     delay( 1 );
-    rgb.setColor( 10, 0, 0 );
-    rgb.show();
+    internalRGB.setColor( 10, 0, 0 );
+    internalRGB.show();
     //buzzer.tone( NTD1, 300 );
 
     delay( 300 );
 
-    rgb.setColor( 0, 10, 0 );
-    rgb.show();
+    internalRGB.setColor( 0, 10, 0 );
+    internalRGB.show();
 
     //buzzer.tone( NTD2, 300 );
     delay( 300 );
 
-    rgb.setColor( 0, 0, 10 );
-    rgb.show();
+    internalRGB.setColor( 0, 0, 10 );
+    internalRGB.show();
 
     //buzzer.tone( NTD3, 300 );
     delay( 300 );
 
-    rgb.setColor( 10, 10, 10 );
-    rgb.show();
+    internalRGB.setColor( 10, 10, 10 );
+    internalRGB.show();
 
     Serial.begin( 115200 );
 
@@ -1120,6 +1137,7 @@ void setup()
     ledMx.setBrightness( 6 );
     ledMx.setColorIndex( 1 );
     randomSeed( analogRead( 6 ) );
+
 }
 
 void loop()
@@ -1133,10 +1151,12 @@ void loop()
         bool currentPressed = !( analogRead( 7 ) > 100 );
         if( currentPressed != pre_buttonPressed )
         {
-            if( ( rgb.getPort() != PORT_7 ) || rgb.getSlot() != SLOT2 )
-            {
-                rgb.reset( PORT_7, SLOT2 );;
-            }
+            /*
+                        if( ( rgb.getPort() != PORT_7 ) || rgb.getSlot() != SLOT2 )
+                        {
+                            rgb.reset( PORT_7, SLOT2 );;
+                        }
+             */
             pre_buttonPressed = currentPressed;
             if( currentPressed == true )
             {
@@ -1150,9 +1170,9 @@ void loop()
                     buzzer.tone( NTD2, 50 );
                     sei();
                     buzzer.noTone();
-                    rgb.setColor( 0, 0, 0 );
-                    rgb.setColor( 0, 10, 0 );
-                    rgb.show();
+                    //rgb.setColor( 0, 0, 0 );
+                    internalRGB.setColor( 0, 10, 0 );
+                    internalRGB.show();
                 }
                 else if( mode == MODE_B )
                 {
@@ -1164,9 +1184,9 @@ void loop()
                     buzzer.tone( NTD2, 50 );
                     sei();
                     buzzer.noTone();
-                    rgb.setColor( 0, 0, 0 );
-                    rgb.setColor( 0, 0, 10 );
-                    rgb.show();
+                    //rgb.setColor( 0, 0, 0 );
+                    internalRGB.setColor( 0, 0, 10 );
+                    internalRGB.show();
                 }
                 else if( mode == MODE_C )
                 {
@@ -1178,9 +1198,9 @@ void loop()
                     buzzer.tone( NTD1, 50 );
                     sei();
                     buzzer.noTone();
-                    rgb.setColor( 0, 0, 0 );
-                    rgb.setColor( 10, 10, 10 );
-                    rgb.show();
+                    //rgb.setColor( 0, 0, 0 );
+                    internalRGB.setColor( 10, 10, 10 );
+                    internalRGB.show();
                 }
             }
         }

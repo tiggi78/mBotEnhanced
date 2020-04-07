@@ -208,9 +208,10 @@
           <buildCommand>${MAKE} -f Makefile</buildCommand>
           <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
           <executablePath></executablePath>
-          <ccTool>
+          <cTool>
             <incDir>
               <pElem>/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino</pElem>
+              <pElem>/usr/local/arduino-1.8.12/hardware/tools/avr/avr/include/avr</pElem>
               <pElem>/usr/local/arduino-1.8.12/hardware/arduino/avr/libraries/Wire/src</pElem>
               <pElem>/usr/local/arduino-1.8.12/hardware/arduino/avr/libraries/SoftwareSerial/src</pElem>
               <pElem>/usr/local/arduino-1.8.12/hardware/arduino/avr/variants/standard</pElem>
@@ -218,9 +219,30 @@
               <pElem>../Makeblock-Libraries/src</pElem>
             </incDir>
             <preprocessorList>
+              <Elem>ARDUINO=1812</Elem>
               <Elem>ARDUINO_ARCH_AVR</Elem>
               <Elem>F_CPU=16000000L</Elem>
-              <Elem>RDUINO=1812</Elem>
+              <Elem>__AVR_ATmega328P__</Elem>
+              <Elem>__AVR_DEVICE_NAME__=atmega328p</Elem>
+              <Elem>__PROG_TYPES_COMPAT__</Elem>
+            </preprocessorList>
+          </cTool>
+          <ccTool>
+            <incDir>
+              <pElem>/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino</pElem>
+              <pElem>/usr/local/arduino-1.8.12/hardware/tools/avr/avr/include/avr</pElem>
+              <pElem>/usr/local/arduino-1.8.12/hardware/arduino/avr/libraries/Wire/src</pElem>
+              <pElem>/usr/local/arduino-1.8.12/hardware/arduino/avr/libraries/SoftwareSerial/src</pElem>
+              <pElem>/usr/local/arduino-1.8.12/hardware/arduino/avr/variants/standard</pElem>
+              <pElem>/usr/local/arduino-1.8.12/hardware/tools/avr/avr/include</pElem>
+              <pElem>../Makeblock-Libraries/src</pElem>
+            </incDir>
+            <preprocessorList>
+              <Elem>ARDUINO=1812</Elem>
+              <Elem>ARDUINO_ARCH_AVR</Elem>
+              <Elem>F_CPU=16000000L</Elem>
+              <Elem>__AVR_ATmega328P__</Elem>
+              <Elem>__AVR_DEVICE_NAME__=atmega328p</Elem>
               <Elem>__PROG_TYPES_COMPAT__</Elem>
             </preprocessorList>
           </ccTool>
