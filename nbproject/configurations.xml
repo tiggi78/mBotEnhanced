@@ -173,6 +173,11 @@
       <in>MeWifi.cpp</in>
       <in>MeWifi.h</in>
     </df>
+    <df root="../YetAnotherArduinoPcIntLibrary/src" name="4">
+      <in>PinChangeInterruptBoards.h</in>
+      <in>YetAnotherPcInt.cpp</in>
+      <in>YetAnotherPcInt.h</in>
+    </df>
     <df root="/usr/local/arduino-1.8.12/hardware/arduino/avr/variants/standard"
         name="3">
       <in>pins_arduino.h</in>
@@ -189,6 +194,7 @@
   <sourceRootList>
     <Elem>.</Elem>
     <Elem>../Makeblock-Libraries/src</Elem>
+    <Elem>../YetAnotherArduinoPcIntLibrary/src</Elem>
     <Elem>/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino</Elem>
     <Elem>/usr/local/arduino-1.8.12/hardware/arduino/avr/variants/standard</Elem>
   </sourceRootList>
@@ -236,6 +242,7 @@
               <pElem>/usr/local/arduino-1.8.12/hardware/arduino/avr/variants/standard</pElem>
               <pElem>/usr/local/arduino-1.8.12/hardware/tools/avr/avr/include</pElem>
               <pElem>../Makeblock-Libraries/src</pElem>
+              <pElem>../YetAnotherArduinoPcIntLibrary/src</pElem>
             </incDir>
             <preprocessorList>
               <Elem>ARDUINO=1812</Elem>
@@ -802,6 +809,21 @@
             flavor2="0">
       </item>
       <item path="../Makeblock-Libraries/src/utility/twi.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../YetAnotherArduinoPcIntLibrary/src/PinChangeInterruptBoards.h"
+            ex="false"
+            tool="3"
+            flavor2="0">
+      </item>
+      <item path="../YetAnotherArduinoPcIntLibrary/src/YetAnotherPcInt.cpp"
+            ex="false"
+            tool="1"
+            flavor2="0">
+      </item>
+      <item path="../YetAnotherArduinoPcIntLibrary/src/YetAnotherPcInt.h"
             ex="false"
             tool="3"
             flavor2="0">

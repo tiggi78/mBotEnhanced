@@ -12,6 +12,7 @@
             <sourceRootList>
                 <sourceRootElem>.</sourceRootElem>
                 <sourceRootElem>../Makeblock-Libraries/src</sourceRootElem>
+                <sourceRootElem>../YetAnotherArduinoPcIntLibrary/src</sourceRootElem>
                 <sourceRootElem>/usr/local/arduino-1.8.12/hardware/arduino/avr/cores/arduino</sourceRootElem>
                 <sourceRootElem>/usr/local/arduino-1.8.12/hardware/arduino/avr/variants/standard</sourceRootElem>
             </sourceRootList>

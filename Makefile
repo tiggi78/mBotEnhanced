@@ -23,7 +23,7 @@ ARDUINO_DIR       = /usr/local/arduino-1.8.12
 ### Path to where the your project's libraries are stored.
 #USER_LIB_PATH    :=  $(PROJECT_DIR)/lib
 USER_LIB_PATH    :=  ../
-ARDUINO_LIBS     += Makeblock-Libraries Wire
+ARDUINO_LIBS     += Makeblock-Libraries Wire YetAnotherArduinoPcIntLibrary
 
 
 ### BOARD_TAG
@@ -63,8 +63,8 @@ AVRDUDE          = /usr/local/arduino-1.8.12/hardware/tools/avr/bin/avrdude
 #CXXFLAGS         += -g
 CXXFLAGS         +=  -Wall -Wextra -Wunused-parameter
 
-#OPTIMIZATION_LEVEL = 0
-
+#OPTIMIZATION_LEVEL = 3
+#
 ### MONITOR_PORT
 ### The port your board is connected to. Using an '*' tries all the ports and finds the right one.
 MONITOR_PORT      = /dev/ttyUSB0*

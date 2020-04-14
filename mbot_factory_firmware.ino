@@ -15,8 +15,15 @@
 
 #include "SerialHandler.h"
 #include "MotorHandler.h"
+
 /*
- * Timer0 (16 bit)
+ * MCU peripherals usage
+ * Timer0 (8 bit)
+ * Timer1 (16 bit, servo?)
+ * Timer2 (8 bit, tone)
+ *
+ * UART
+ *
  *
  */
 
@@ -98,6 +105,7 @@ void LedsOff();
 void readSensor( enum device_e device );
 void runModule( enum device_e device );
 
+
 /* GLOBALS (peripehrals) */
 MeRGBLed rgb( 0, 16 );
 
@@ -169,7 +177,7 @@ enum modes_e
     MODE_A,
     MODE_B,
     MODE_C
-} mode = MODE_A;
+} mode = MODE_B;
 
 /*
 typedef struct MeModule
@@ -540,13 +548,15 @@ void modeB()
 {
     uint16_t high = 20;
     uint16_t low  = 10;
-    double dist = ultr.distanceCm( 70 );
+    double dist = ultr.distanceCm( false );
+
     uint16_t d = ( uint16_t ) dist;
     Serial.print( millis() );
-    Serial.print( "MODE B dist, d: " );
-    Serial.print( dist );
-    Serial.print( ", " );
-    Serial.println( d );
+    Serial.print( " MODE B dist: " );
+    Serial.println( dist );
+
+    //Serial.print( "MODE B time: " );
+    //Serial.println( ultr._measureValue );
 
     //static long time = millis();
     uint8_t randNumber = random( 2 );
@@ -1087,6 +1097,7 @@ void readSensor( enum device_e device )
 }
 #define INT_LED 13
 #define INT_BUTTON   7
+
 void setup()
 {
     delay( 5 );
@@ -1146,6 +1157,7 @@ void loop()
 
     while( 1 )
     {
+        ultr.trigger();
         get_ir_command();
         serialHandle();
         bool currentPressed = !( analogRead( 7 ) > 100 );
