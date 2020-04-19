@@ -10,3 +10,4 @@ Starting from Makeblock-Libraries/examples/Firmware_For_mBlock/mbot_factory_firm
 
 - Code cleanup and
 - Ultrasonic now uses PCINT to measure pulse and can be triggered witouth waiting the measure
+- Added simple static task scheduler to trigger simple actions on specific time interval (ultrasonic reading)
