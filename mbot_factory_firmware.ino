@@ -15,18 +15,20 @@
 
 #include "SerialHandler.h"
 #include "MotorHandler.h"
+#include "simpleScheduler.h"
 
 /*
  * MCU peripherals usage
  * Timer0 (8 bit)
- * Timer1 (16 bit, servo?)
- * Timer2 (8 bit, tone)
- *
+ *   Arduino millis() handling. Fast PWM mode, /64 prescaler, 0xFF overflow
+ * Timer1 (16 bit)
+ *   servo lib
+ * Timer2 (8 bit)
+ *   tone()
  * UART
  *
  *
  */
-
 
 /* Device of readSensor() function */
 enum device_e
@@ -551,7 +553,12 @@ void modeB()
     double dist = ultr.distanceCm( false );
 
     uint16_t d = ( uint16_t ) dist;
-    Serial.print( millis() );
+    uint32_t elapsed = millis();
+
+    Serial.print( elapsed );
+
+    Serial.println( "" );
+
     Serial.print( " MODE B dist: " );
     Serial.println( dist );
 
@@ -1095,11 +1102,21 @@ void readSensor( enum device_e device )
         break;
     }
 }
+
 #define INT_LED 13
 #define INT_BUTTON   7
-
+void blink( void* arg )
+{
+    static bool toggle = TRUE;
+    toggle = !toggle;
+    digitalWrite( INT_LED, toggle );
+}
 void setup()
 {
+
+    simpleScheduler::addTask( 250, MeUltrasonicSensor::triggerTask, &ultr );
+    simpleScheduler::addTask( 1000, blink, NULL );
+
     delay( 5 );
     Stop();
     LedsOff();
@@ -1157,7 +1174,7 @@ void loop()
 
     while( 1 )
     {
-        ultr.trigger();
+        //ultr.trigger();
         get_ir_command();
         serialHandle();
         bool currentPressed = !( analogRead( 7 ) > 100 );

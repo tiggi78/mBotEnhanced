@@ -54,6 +54,8 @@
       <in>SerialHandler.cpp</in>
       <in>SerialHandler.h</in>
       <in>mbot_factory_firmware.ino</in>
+      <in>simpleScheduler.cpp</in>
+      <in>simpleScheduler.h</in>
     </df>
     <df root="../Makeblock-Libraries/src" name="2">
       <df name="utility">
@@ -1062,6 +1064,10 @@
       <item path="SerialHandler.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="mbot_factory_firmware.ino" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="simpleScheduler.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="simpleScheduler.h" ex="false" tool="3" flavor2="0">
       </item>
     </conf>
   </confs>
