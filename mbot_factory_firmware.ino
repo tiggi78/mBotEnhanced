@@ -21,12 +21,14 @@
  * MCU peripherals usage
  * Timer0 (8 bit)
  *   Arduino millis() handling. Fast PWM mode, /64 prescaler, 0xFF overflow
+ *
  * Timer1 (16 bit)
  *   servo lib
  * Timer2 (8 bit)
  *   tone()
+ *   MeIR Infrared sender (receiver)
  * UART
- *
+ *  Arduino buffered serial communcation (UART/USB & Bluetooth moudule) with interrupt
  *
  */
 
@@ -106,7 +108,7 @@ void LedsOff();
 
 void readSensor( enum device_e device );
 void runModule( enum device_e device );
-
+void getIRCommand();
 
 /* GLOBALS (peripehrals) */
 MeRGBLed rgb( 0, 16 );
@@ -115,12 +117,14 @@ MeRGBLed internalRGB( PORT_7, 2 );
 
 MeUltrasonicSensor ultr( PORT_3 );
 MeLineFollower line( PORT_2 );
+
 MeLEDMatrix ledMx;
 MeIR ir;
 MeJoystick joystick;
 MeBuzzer buzzer;
 MeTemperature ts;
 Me7SegmentDisplay seg;
+
 MePort generalDevice;
 Servo servo;
 
@@ -179,7 +183,7 @@ enum modes_e
     MODE_A,
     MODE_B,
     MODE_C
-} mode = MODE_B;
+} mode = MODE_A;
 
 /*
 typedef struct MeModule
@@ -269,17 +273,20 @@ void buzzerOff()
     buzzer.noTone();
 }
 
-void get_ir_command()
+void getIRCommand()
 {
-    static long time = millis();
+    static unsigned long time = millis();
+
     if( ir.decode() )
     {
         uint32_t value = ir.value;
-        Serial.print( "IRVALUE: " );
-        String hex( value, 16 );
-        Serial.print( hex );
 
         time = millis();
+        Serial.print( time );
+        Serial.print( " | IRVALUE: " );
+        String hex( value, 16 );
+        Serial.println( hex );
+
         switch( ( value >> 16 ) & 0xff )
         {
         case IR_BUTTON_A:
@@ -555,9 +562,15 @@ void modeB()
     uint16_t d = ( uint16_t ) dist;
     uint32_t elapsed = millis();
 
-    Serial.print( elapsed );
 
-    Serial.println( "" );
+    Serial.print( "TASK0: " );
+    Serial.println( simpleScheduler::getTaskDuration( 0 ) );
+    Serial.print( "TASK1: " );
+    Serial.println( simpleScheduler::getTaskDuration( 1 ) );
+
+    //Serial.print( elapsed );
+
+    //Serial.println( "" );
 
     Serial.print( " MODE B dist: " );
     Serial.println( dist );
@@ -571,7 +584,7 @@ void modeB()
     if( ( d > high ) || ( d == 0 ) )
     {
         Forward();
-        Serial.println( "Forward" );
+        //Serial.println( "Forward" );
     }
     else if( ( d > low ) && ( d < high ) )
     {
@@ -580,13 +593,13 @@ void modeB()
         case 0:
             TurnLeft();
             delay( 300 );
-            Serial.println( "Left 300" );
+            //Serial.println( "Left 300" );
 
             break;
         case 1:
             TurnRight();
             delay( 300 );
-            Serial.println( "Right 300" );
+            //Serial.println( "Right 300" );
             break;
         }
     }
@@ -597,12 +610,12 @@ void modeB()
         case 0:
             TurnLeft();
             delay( 800 );
-            Serial.println( "Left 800" );
+            //Serial.println( "Left 800" );
             break;
         case 1:
             TurnRight();
             delay( 800 );
-            Serial.println( "Right 800" );
+            //Serial.println( "Right 800" );
             break;
         }
     }
@@ -1103,37 +1116,34 @@ void readSensor( enum device_e device )
     }
 }
 
-#define INT_LED 13
-#define INT_BUTTON   7
+#define INTERNAL_LED 13
+#define INTERNAL_BUTTON   7
 void blink( void* arg )
 {
     static bool toggle = TRUE;
     toggle = !toggle;
-    digitalWrite( INT_LED, toggle );
+    digitalWrite( INTERNAL_LED, toggle );
 }
 void setup()
 {
+    delay( 5 );
+    Stop();
+    LedsOff();
+
+    pinMode( INTERNAL_LED, OUTPUT );
+    pinMode( INTERNAL_BUTTON, INPUT );
+    digitalWrite( INTERNAL_LED, HIGH );
+    delay( 300 );
+    digitalWrite( INTERNAL_LED, LOW );
 
     simpleScheduler::addTask( 250, MeUltrasonicSensor::triggerTask, &ultr );
     simpleScheduler::addTask( 1000, blink, NULL );
 
-    delay( 5 );
-    Stop();
-    LedsOff();
-    pinMode( INT_LED, OUTPUT );
-    pinMode( INT_BUTTON, INPUT );
-    digitalWrite( INT_LED, HIGH );
-
-    delay( 300 );
-
-    digitalWrite( INT_LED, LOW );
     internalRGB.reset( PORT_7, SLOT2 );
 
-    internalRGB.setColor( 0, 0, 0 );
-    rgb.show();
-    delay( 1 );
     internalRGB.setColor( 10, 0, 0 );
     internalRGB.show();
+
     //buzzer.tone( NTD1, 300 );
 
     delay( 300 );
@@ -1156,6 +1166,7 @@ void setup()
     Serial.begin( 115200 );
 
     buzzer.noTone();
+
     ir.begin();
 
     Serial.println( "[mBotEnhanced]" );
@@ -1164,86 +1175,86 @@ void setup()
 
     ledMx.setBrightness( 6 );
     ledMx.setColorIndex( 1 );
-    randomSeed( analogRead( 6 ) );
 
+    /* Initialize random seed one time */
+    randomSeed( analogRead( 6 ) );
 }
 
 void loop()
 {
-    static boolean pre_buttonPressed = false;
+    static boolean buttonWasPressed = false;
 
-    while( 1 )
+    //while( 1 )
+    //{
+
+    getIRCommand();
+    serialHandle();
+
+    /* Check if internal button was pressed. Executes actions only one time
+     * even if the button remain pressed
+     */
+    bool buttonPressed = !( analogRead( INTERNAL_BUTTON ) > 100 );
+    if( buttonPressed != buttonWasPressed )
     {
-        //ultr.trigger();
-        get_ir_command();
-        serialHandle();
-        bool currentPressed = !( analogRead( 7 ) > 100 );
-        if( currentPressed != pre_buttonPressed )
+        buttonWasPressed = buttonPressed;
+        /* If button is pressed now, change mode*/
+        if( buttonPressed == true )
         {
-            /*
-                        if( ( rgb.getPort() != PORT_7 ) || rgb.getSlot() != SLOT2 )
-                        {
-                            rgb.reset( PORT_7, SLOT2 );;
-                        }
-             */
-            pre_buttonPressed = currentPressed;
-            if( currentPressed == true )
+            if( mode == MODE_A )
             {
-                if( mode == MODE_A )
-                {
-                    mode = MODE_B;
-                    ChangeSpeed( 200 );
-                    Stop();
-                    LedsOff();
-                    cli();
-                    buzzer.tone( NTD2, 50 );
-                    sei();
-                    buzzer.noTone();
-                    //rgb.setColor( 0, 0, 0 );
-                    internalRGB.setColor( 0, 10, 0 );
-                    internalRGB.show();
-                }
-                else if( mode == MODE_B )
-                {
-                    mode = MODE_C;
-                    ChangeSpeed( 200 );
-                    Stop();
-                    LedsOff();
-                    cli();
-                    buzzer.tone( NTD2, 50 );
-                    sei();
-                    buzzer.noTone();
-                    //rgb.setColor( 0, 0, 0 );
-                    internalRGB.setColor( 0, 0, 10 );
-                    internalRGB.show();
-                }
-                else if( mode == MODE_C )
-                {
-                    mode = MODE_A;
-                    ChangeSpeed( 220 );
-                    Stop();
-                    LedsOff();
-                    cli();
-                    buzzer.tone( NTD1, 50 );
-                    sei();
-                    buzzer.noTone();
-                    //rgb.setColor( 0, 0, 0 );
-                    internalRGB.setColor( 10, 10, 10 );
-                    internalRGB.show();
-                }
+                mode = MODE_B;
+                ChangeSpeed( 200 );
+                Stop();
+                LedsOff();
+                cli();
+                buzzer.tone( NTD2, 50 );
+                sei();
+                buzzer.noTone();
+
+                internalRGB.setColor( 0, 10, 0 );
+                internalRGB.show();
+            }
+            else if( mode == MODE_B )
+            {
+                mode = MODE_C;
+                ChangeSpeed( 200 );
+                Stop();
+                LedsOff();
+                cli();
+                buzzer.tone( NTD2, 50 );
+                sei();
+                buzzer.noTone();
+
+                internalRGB.setColor( 0, 0, 10 );
+                internalRGB.show();
+            }
+            else if( mode == MODE_C )
+            {
+                mode = MODE_A;
+                ChangeSpeed( 220 );
+                Stop();
+                LedsOff();
+                cli();
+                buzzer.tone( NTD1, 50 );
+                sei();
+                buzzer.noTone();
+
+                internalRGB.setColor( 10, 10, 10 );
+                internalRGB.show();
             }
         }
-        switch( mode )
-        {
-        case MODE_A:
-            modeA();
-            break;
-        case MODE_B:
-            modeB();
-            break;
-        case MODE_C:
-            modeC();
-            break;
-        }
     }
+    switch( mode )
+    {
+    case MODE_A:
+        modeA();
+        break;
+    case MODE_B:
+        modeB();
+        break;
+    case MODE_C:
+        modeC();
+        break;
+    }
+    //}
 }

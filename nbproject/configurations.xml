@@ -175,13 +175,13 @@
       <in>MeWifi.cpp</in>
       <in>MeWifi.h</in>
     </df>
-    <df root="../YetAnotherArduinoPcIntLibrary/src" name="4">
+    <df root="../YetAnotherArduinoPcIntLibrary/src" name="3">
       <in>PinChangeInterruptBoards.h</in>
       <in>YetAnotherPcInt.cpp</in>
       <in>YetAnotherPcInt.h</in>
     </df>
     <df root="/usr/local/arduino-1.8.12/hardware/arduino/avr/variants/standard"
-        name="3">
+        name="4">
       <in>pins_arduino.h</in>
     </df>
     <logicalFolder name="ExternalFiles"

@@ -19,6 +19,7 @@ class simpleScheduler
 public:
     static void addTask( uint16_t taskTime, void ( *function )( void* arg ), void* argument );
     static void updateTasks();
+    static uint8_t getTaskDuration( uint8_t taskid );
 private:
     static uint8_t m_numberOfTasks;
     static struct task_s
@@ -30,6 +31,8 @@ private:
         uint16_t counter;
         /* Task tick time in ms */
         uint16_t taskTime;
+        /* Task last duration (us)*/
+        uint16_t taskDuration;
     } m_tasks[MAX_TASKS];
 
     /* Avoid calling these functions */

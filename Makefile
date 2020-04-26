@@ -63,7 +63,7 @@ AVRDUDE          = /usr/local/arduino-1.8.12/hardware/tools/avr/bin/avrdude
 #CXXFLAGS         += -g
 CXXFLAGS         +=  -Wall -Wextra -Wunused-parameter
 
-#OPTIMIZATION_LEVEL = 3
+#OPTIMIZATION_LEVEL = s
 #
 ### MONITOR_PORT
 ### The port your board is connected to. Using an '*' tries all the ports and finds the right one.
