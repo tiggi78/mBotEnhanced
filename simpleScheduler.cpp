@@ -38,7 +38,7 @@ void simpleScheduler::addTask( uint16_t taskTime, void ( *function )( void* arg 
     }
 }
 
-static uint8_t simpleScheduler::getTaskDuration( uint8_t taskid )
+uint8_t simpleScheduler::getTaskDuration( uint8_t taskid )
 {
     if( taskid < MAX_TASKS )
         return m_tasks[taskid].taskDuration;
@@ -46,7 +46,7 @@ static uint8_t simpleScheduler::getTaskDuration( uint8_t taskid )
         return 0;
 }
 
-static void simpleScheduler::updateTasks()
+void simpleScheduler::updateTasks()
 {
     for( uint8_t i = 0; i < m_numberOfTasks; ++i )
     {

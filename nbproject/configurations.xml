@@ -49,6 +49,8 @@
       <in>wiring_shift.c</in>
     </df>
     <df root="." name="1">
+      <in>AnalogHandler.cpp</in>
+      <in>AnalogHandler.h</in>
       <in>MotorHandler.cpp</in>
       <in>MotorHandler.h</in>
       <in>SerialHandler.cpp</in>
@@ -1054,6 +1056,10 @@
             ex="false"
             tool="3"
             flavor2="0">
+      </item>
+      <item path="AnalogHandler.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="AnalogHandler.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="MotorHandler.cpp" ex="false" tool="1" flavor2="0">
       </item>

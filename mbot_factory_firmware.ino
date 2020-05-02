@@ -16,6 +16,7 @@
 #include "SerialHandler.h"
 #include "MotorHandler.h"
 #include "simpleScheduler.h"
+#include "AnalogHandler.h"
 
 /*
  * MCU peripherals usage
@@ -24,9 +25,11 @@
  *
  * Timer1 (16 bit)
  *   servo lib
+ *
  * Timer2 (8 bit)
  *   tone()
  *   MeIR Infrared sender (receiver)
+ *
  * UART
  *  Arduino buffered serial communcation (UART/USB & Bluetooth moudule) with interrupt
  *
@@ -276,7 +279,7 @@ void buzzerOff()
 void getIRCommand()
 {
     static unsigned long time = millis();
-
+    uint8_t punti;
     if( ir.decode() )
     {
         uint32_t value = ir.value;
@@ -298,13 +301,6 @@ void getIRCommand()
             cli();
             buzzer.tone( NTD1, 300 );
             sei();
-            /*
-                        if( ( rgb.getPort() != PORT_7 ) || rgb.getSlot() != SLOT2 )
-                        {
-                            rgb.reset( PORT_7, SLOT2 );;
-                        }
-                        rgb.setColor( 0, 0, 0 );
-             */
 
             internalRGB.setColor( 10, 10, 10 );
             internalRGB.show();
@@ -318,13 +314,6 @@ void getIRCommand()
             cli();
             buzzer.tone( NTD2, 300 );
             sei();
-            /*
-            if( ( rgb.getPort() != PORT_7 ) || rgb.getSlot() != SLOT2 )
-            {
-                rgb.reset( PORT_7, SLOT2 );;
-            }
-            rgb.setColor( 0, 0, 0 );
-            */
             internalRGB.setColor( 0, 10, 0 );
             internalRGB.show();
             break;
@@ -337,28 +326,92 @@ void getIRCommand()
             cli();
             buzzer.tone( NTD3, 300 );
             sei();
-            /*
-            if( ( rgb.getPort() != PORT_7 ) || rgb.getSlot() != SLOT2 )
-            {
-                rgb.reset( PORT_7, SLOT2 );;
-            }
-            rgb.setColor( 0, 0, 0 );
-             */
             internalRGB.setColor( 0, 0, 10 );
             internalRGB.show();
+            break;
+
+        case IR_BUTTON_D:
+            TurnLeft();
+            delay( random( 2000, 5000 ) );
+            Stop();
+            delay( 1000 );
+            punti = random( 1, 10 );
+            ChangeSpeed( 150 );
+            switch( punti )
+            {
+            case 1:
+                Forward();
+                break;
+
+            case 2:
+                Backward();
+                break;
+
+            case 3:
+                TurnLeft();
+                break;
+
+            case 4:
+                TurnRight();
+                break;
+
+            case 5:
+                internalRGB.setColor( 200, 0, 0 );
+                internalRGB.show();
+                break;
+
+            case 6:
+                internalRGB.setColor( 140, 60, 0 );
+                internalRGB.show();
+                break;
+
+            case 7:
+                internalRGB.setColor( 255, 240, 0 );
+                internalRGB.show();
+
+                break;
+
+            case 8:
+                internalRGB.setColor( 0, 200, 0 );
+                internalRGB.show();
+
+                break;
+
+            case 9:
+                internalRGB.setColor( 0, 0, 200 );
+                internalRGB.show();
+
+                break;
+
+            case 10:
+                internalRGB.setColor( 92, 53, 102 );
+                internalRGB.show();
+
+                break;
+
+            }
+            delay( 1500 );
+            Stop();
+            LedsOff();
+            cli();
+            buzzer.tone( NTDL1, 200 );
+            buzzer.tone( NTD1, 200 );
+            buzzer.tone( NTDH1, 200 );
+            sei();
+            break;
+        case IR_BUTTON_E:
+            {
+                internalRGB.setColor( random( 255 ), random( 255 ), random( 255 ) );
+                internalRGB.show();
+            }
+            break;
+        case IR_BUTTON_SETTING:
             break;
         case IR_BUTTON_PLUS:
             controlflag = IR_CONTROLER;
             if( mode == MODE_A )
             {
                 motorStatus = RUN_F;
-                /*
-                if( ( rgb.getPort() != PORT_7 ) || rgb.getSlot() != SLOT2 )
-                {
-                    rgb.reset( PORT_7, SLOT2 );;
-                }
-                rgb.setColor( 0, 0, 0 );
-                */
                 internalRGB.setColor( 10, 10, 0 );
                 internalRGB.show();
             }
@@ -474,6 +527,18 @@ void getIRCommand()
             sei();
             ChangeSpeed( factor * 1 + minSpeed );
             break;
+        case IR_BUTTON_0:
+            controlflag = IR_CONTROLER;
+            cli();
+            buzzer.tone( NTDH1, 200 );
+            buzzer.tone( NTD1, 200 );
+            buzzer.tone( NTDL1, 200 );
+            sei();
+            ChangeSpeed( 0 );
+            internalRGB.setColor( 255, 255, 255 );
+            internalRGB.show();
+
+            break;
         }
     }
     else if( ( controlflag == IR_CONTROLER ) && ( ( millis() - time ) > 120 ) )
@@ -488,8 +553,8 @@ void getIRCommand()
                 rgb.reset( PORT_7, SLOT2 );;
             }
              */
-            internalRGB.setColor( 10, 10, 10 );
-            internalRGB.show();
+            //internalRGB.setColor( 10, 10, 10 );
+            //internalRGB.show();
         }
         else if( mode == MODE_B )
         {
@@ -574,9 +639,12 @@ void modeB()
 
     Serial.print( " MODE B dist: " );
     Serial.println( dist );
+    Serial.println( "Analogs: " );
+    for( int a = 0; a < 9; ++a )
+        Serial.println( AnalogHandler::getValue( a ) );
 
-    //Serial.print( "MODE B time: " );
-    //Serial.println( ultr._measureValue );
+    //Serial.print( "light time: " );
+    //Serial.println( lightTimer );
 
     //static long time = millis();
     uint8_t randNumber = random( 2 );
@@ -1118,12 +1186,15 @@ void readSensor( enum device_e device )
 
 #define INTERNAL_LED 13
 #define INTERNAL_BUTTON   7
+
 void blink( void* arg )
 {
     static bool toggle = TRUE;
     toggle = !toggle;
     digitalWrite( INTERNAL_LED, toggle );
 }
+
+
 void setup()
 {
     delay( 5 );
@@ -1136,8 +1207,13 @@ void setup()
     delay( 300 );
     digitalWrite( INTERNAL_LED, LOW );
 
+    /* Initialize random seed one time */
+    randomSeed( analogRead( A6 ) );
+
+    AnalogHandler::begin();
+
     simpleScheduler::addTask( 250, MeUltrasonicSensor::triggerTask, &ultr );
-    simpleScheduler::addTask( 1000, blink, NULL );
+    simpleScheduler::addTask( 100, AnalogHandler::task );
 
     internalRGB.reset( PORT_7, SLOT2 );
 
@@ -1176,16 +1252,11 @@ void setup()
     ledMx.setBrightness( 6 );
     ledMx.setColorIndex( 1 );
 
-    /* Initialize random seed one time */
-    randomSeed( analogRead( 6 ) );
 }
 
 void loop()
 {
     static boolean buttonWasPressed = false;
-
-    //while( 1 )
-    //{
 
     getIRCommand();
     serialHandle();
@@ -1193,7 +1264,9 @@ void loop()
     /* Check if internal button was pressed. Executes actions only one time
      * even if the button remain pressed
      */
-    bool buttonPressed = !( analogRead( INTERNAL_BUTTON ) > 100 );
+    //bool buttonPressed = !( analogRead( INTERNAL_BUTTON ) > 100 );
+    bool buttonPressed = !( AnalogHandler::getValue( INTERNAL_BUTTON ) > 100 );
+
     if( buttonPressed != buttonWasPressed )
     {
         buttonWasPressed = buttonPressed;
@@ -1256,5 +1329,4 @@ void loop()
         modeC();
         break;
     }
-    //}
 }

@@ -10,6 +10,7 @@
  */
 
 #include <stdint.h>
+#include <stddef.h>
 
 #ifndef SIMPLESCHEDULER_H
 #define SIMPLESCHEDULER_H
@@ -17,7 +18,7 @@
 class simpleScheduler
 {
 public:
-    static void addTask( uint16_t taskTime, void ( *function )( void* arg ), void* argument );
+    static void addTask( uint16_t taskTime, void ( *function )( void* arg ), void* argument = NULL );
     static void updateTasks();
     static uint8_t getTaskDuration( uint8_t taskid );
 private:
