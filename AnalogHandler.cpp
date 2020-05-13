@@ -13,8 +13,8 @@
 #include <util/atomic.h>
 
 #define DISABLED_ANALOG 255
-uint8_t AnalogHandler::m_analogs[MAX_ANALOGS] = {0, 1, 2, 3, 4, 5, 6, 7, 8};
-volatile uint16_t AnalogHandler::m_analogValues[MAX_ANALOGS] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+uint8_t AnalogHandler::m_analogs[MAX_ANALOGS] = {0, 1, 255, 255, 4, 5, 6, 7, 8, 14, 15};
+volatile uint16_t AnalogHandler::m_analogValues[MAX_ANALOGS] = {0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF, 0xFFFF};
 volatile uint8_t AnalogHandler::m_currentIndex = 0;
 
 #pragma GCC push_options
@@ -49,7 +49,7 @@ ISR( ADC_vect )
     {
         /* trigger new conversion on new channel */
         ADMUX = ( ( ADMUX & 0xF0 ) | AnalogHandler::m_analogs[AnalogHandler::m_currentIndex] );
-        AnalogHandler::m_analogValues[AnalogHandler::m_currentIndex] = micros();
+        //AnalogHandler::m_analogValues[AnalogHandler::m_currentIndex] = micros();
         /* start the conversion */
         ADCSRA |= ( 1 << ADSC );
     }

@@ -421,13 +421,6 @@ void getIRCommand()
             if( mode == MODE_A )
             {
                 motorStatus = RUN_B;
-                /*
-                if( ( rgb.getPort() != PORT_7 ) || rgb.getSlot() != SLOT2 )
-                {
-                    rgb.reset( PORT_7, SLOT2 );;
-                }
-                rgb.setColor( 0, 0, 0 );
-                */
                 internalRGB.setColor( 10, 0, 0 );
                 internalRGB.show();
             }
@@ -437,13 +430,6 @@ void getIRCommand()
             if( mode == MODE_A )
             {
                 motorStatus = RUN_R;
-                /*
-                if( ( rgb.getPort() != PORT_7 ) || rgb.getSlot() != SLOT2 )
-                {
-                    rgb.reset( PORT_7, SLOT2 );;
-                }
-                rgb.setColor( 0, 0, 0 );
-                */
                 internalRGB.setColor( 1, 10, 10, 0 );
                 internalRGB.show();
             }
@@ -453,13 +439,6 @@ void getIRCommand()
             if( mode == MODE_A )
             {
                 motorStatus = RUN_L;
-                /*
-                if( ( rgb.getPort() != PORT_7 ) || rgb.getSlot() != SLOT2 )
-                {
-                    rgb.reset( PORT_7, SLOT2 );;
-                }
-                rgb.setColor( 0, 0, 0 );
-                */
                 internalRGB.setColor( 2, 10, 10, 0 );
                 internalRGB.show();
             }
@@ -547,34 +526,16 @@ void getIRCommand()
         time = millis();
         if( mode == MODE_A )
         {
-            /*
-            if( ( rgb.getPort() != PORT_7 ) || rgb.getSlot() != SLOT2 )
-            {
-                rgb.reset( PORT_7, SLOT2 );;
-            }
-             */
-            //internalRGB.setColor( 10, 10, 10 );
-            //internalRGB.show();
+            internalRGB.setColor( 10, 10, 10 );
+            internalRGB.show();
         }
         else if( mode == MODE_B )
         {
-            /*
-            if( ( rgb.getPort() != PORT_7 ) || rgb.getSlot() != SLOT2 )
-            {
-                rgb.reset( PORT_7, SLOT2 );;
-            }
-            */
             internalRGB.setColor( 0, 10, 0 );
             internalRGB.show();
         }
         else if( mode == MODE_C )
         {
-            /*
-            if( ( rgb.getPort() != PORT_7 ) || rgb.getSlot() != SLOT2 )
-            {
-                rgb.reset( PORT_7, SLOT2 );;
-            }
-             */
             internalRGB.setColor( 0, 0, 10 );
             internalRGB.show();
         }
@@ -625,28 +586,6 @@ void modeB()
     double dist = ultr.distanceCm( false );
 
     uint16_t d = ( uint16_t ) dist;
-    uint32_t elapsed = millis();
-
-
-    Serial.print( "TASK0: " );
-    Serial.println( simpleScheduler::getTaskDuration( 0 ) );
-    Serial.print( "TASK1: " );
-    Serial.println( simpleScheduler::getTaskDuration( 1 ) );
-
-    //Serial.print( elapsed );
-
-    //Serial.println( "" );
-
-    Serial.print( " MODE B dist: " );
-    Serial.println( dist );
-    Serial.println( "Analogs: " );
-    for( int a = 0; a < 9; ++a )
-        Serial.println( AnalogHandler::getValue( a ) );
-
-    //Serial.print( "light time: " );
-    //Serial.println( lightTimer );
-
-    //static long time = millis();
     uint8_t randNumber = random( 2 );
 
     if( ( d > high ) || ( d == 0 ) )
@@ -1194,7 +1133,6 @@ void blink( void* arg )
     digitalWrite( INTERNAL_LED, toggle );
 }
 
-
 void setup()
 {
     delay( 5 );
@@ -1249,8 +1187,8 @@ void setup()
     Serial.print( "Version: " );
     Serial.println( mVersion );
 
-    ledMx.setBrightness( 6 );
-    ledMx.setColorIndex( 1 );
+    //ledMx.setBrightness( 6 );
+    //ledMx.setColorIndex( 1 );
 
 }
 
@@ -1260,6 +1198,40 @@ void loop()
 
     getIRCommand();
     serialHandle();
+    uint32_t elapsed = millis();
+    static uint32_t lastPrinted = 0;
+    if( elapsed - lastPrinted > 200 )
+    {
+        lastPrinted = elapsed;
+
+        Serial.print( "ELAPSED: " );
+        Serial.println( elapsed );
+
+        Serial.print( "MODE: " );
+        Serial.println( char( 'A' + mode ) );
+
+        Serial.println( "TASKS" );
+        for( uint8_t i = 0; i < MAX_TASKS; ++i )
+        {
+            Serial.print( i );
+            Serial.print( ": " );
+            Serial.println( simpleScheduler::getTaskDuration( i ) );
+        }
+
+        Serial.println( "ANALOGS" );
+        for( uint8_t i = 0; i < MAX_ANALOGS; ++i )
+        {
+            Serial.print( i );
+            Serial.print( ": " );
+            Serial.print( AnalogHandler::getValue( i ) );
+            Serial.print( "\t" );
+            Serial.println( AnalogHandler::getValue( i ) * ( 5.0 / 1023.0 ) );
+
+        }
+        Serial.print( "DISTANCE [cm]: " );
+        Serial.println( ultr.distanceCm( false ) );
+
+    }
 
     /* Check if internal button was pressed. Executes actions only one time
      * even if the button remain pressed

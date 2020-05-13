@@ -13,7 +13,7 @@
 #define ANALOGHANDLER_H
 #include <stdint.h>
 #include <Arduino.h>
-#define MAX_ANALOGS 9
+#define MAX_ANALOGS 11
 
 /* http://www.cyberrailguru.com/software-development/interrupts-in-c-and-avr*/
 extern "C" void ADC_vect( void )  __attribute__( ( signal ) );
