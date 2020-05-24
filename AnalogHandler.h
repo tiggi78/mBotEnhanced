@@ -33,6 +33,7 @@ private:
     static uint8_t m_analogs[MAX_ANALOGS];
     volatile static uint16_t m_analogValues[MAX_ANALOGS];
     volatile static uint8_t m_currentIndex;
+    volatile static uint8_t ADMUXRef;
 
     AnalogHandler() {}
     AnalogHandler( const AnalogHandler& orig ) {}

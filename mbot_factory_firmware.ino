@@ -1200,6 +1200,7 @@ void loop()
     serialHandle();
     uint32_t elapsed = millis();
     static uint32_t lastPrinted = 0;
+    float Vref = 5.0;
     if( elapsed - lastPrinted > 200 )
     {
         lastPrinted = elapsed;
@@ -1219,13 +1220,17 @@ void loop()
         }
 
         Serial.println( "ANALOGS" );
+        Vref = 1.1 * 1023.0 / AnalogHandler::getValue( 9 );
+        Serial.print( "Vref: " );
+        Serial.println( Vref );
+
         for( uint8_t i = 0; i < MAX_ANALOGS; ++i )
         {
             Serial.print( i );
             Serial.print( ": " );
             Serial.print( AnalogHandler::getValue( i ) );
             Serial.print( "\t" );
-            Serial.println( AnalogHandler::getValue( i ) * ( 5.0 / 1023.0 ) );
+            Serial.println( AnalogHandler::getValue( i ) * ( Vref / 1023.0 ) );
 
         }
         Serial.print( "DISTANCE [cm]: " );
