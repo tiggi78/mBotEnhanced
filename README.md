@@ -19,3 +19,5 @@ Starting from Makeblock-Libraries/examples/Firmware_For_mBlock/mbot_factory_firm
   - My fork of Makeblock Libraries: `git clone https://github.com/tiggi78/Makeblock-Libraries`
   - This repo: `git clone https://github.com/tiggi78/mBotEnhanced`
 - Install astyle: `apt install astyle`
+- Go to `mbotEnhanced` folder and run `make`
+- Run `make help` to know all the comands available
