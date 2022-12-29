@@ -17,7 +17,7 @@ ARDMK_DIR         = /usr/share/arduino
 ### On OS X:
 #ARDUINO_DIR       = /Applications/Arduino.app/Contents/Java
 ### or on Linux: (remove the one you don't want)
-ARDUINO_DIR       = /usr/local/arduino-1.8.12
+#ARDUINO_DIR       = /usr/share/arduino
 
 ### USER_LIB_PATH
 ### Path to where the your project's libraries are stored.
@@ -40,14 +40,13 @@ MONITOR_BAUDRATE  = 115200
 #AVR_TOOLS_DIR     = /usr/local
 ### or on Linux: (remove the one you don't want)
 #AVR_TOOLS_DIR     = /usr
-AVR_TOOLS_DIR     = /usr/local/arduino-1.8.12/hardware/tools/avr
 
 ### AVRDUDE
 ### Path to avrdude directory.
 ### On OS X with `homebrew`:
 #AVRDUDE          = /usr/local/bin/avrdude
 ### or on Linux: (remove the one you don't want)
-AVRDUDE          = /usr/local/arduino-1.8.12/hardware/tools/avr/bin/avrdude
+#AVRDUDE          = /usr/share/arduino/hardware/tools/avr/bin/avrdude
 
 ### CFLAGS_STD
 ### Set the C standard to be used during compilation. Documentation (https://github.com/WeAreLeka/Arduino-Makefile/blob/std-flags/arduino-mk-vars.md#cflags_std)
@@ -61,7 +60,7 @@ AVRDUDE          = /usr/local/arduino-1.8.12/hardware/tools/avr/bin/avrdude
 ### Flags you might want to set for debugging purpose. Comment to stop.
 #CXXFLAGS         += -pedantic -Wall -Wextra
 #CXXFLAGS         += -g
-CXXFLAGS         +=  -Wall -Wextra -Wunused-parameter
+CXXFLAGS         += -Wall -Wextra  -Wunused-parameter
 
 #OPTIMIZATION_LEVEL = s
 #
